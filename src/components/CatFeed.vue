@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style='padding:4%;'>
     <virtual-scroll-list :items='items' :item-height="80" :container-height="500">
       <template #default="{item}">
         <my-component :items="item"></my-component>
