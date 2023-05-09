@@ -1,53 +1,38 @@
 <template>
-  <div class="container">
-    <vue3-virtual-list
-      :item-height="30"
-      :total-items="items.length"
-      :render-item="renderItem"
-    />
+  <div>
+    <virtual-scroll-list :items="items" :item-height="40" container-height="500px">
+      <template #default="{item}">
+        <my-component :data="item"></my-component>
+      </template>
+    </virtual-scroll-list>
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-import Vue3VirtualList from 'vue3-virtual-list';
+import VirtualScrollList from './VirtualScrollList.vue'
+import MyComponent from './MyComponent.vue'
 
-export default defineComponent({
-  name: 'CatFeed',
+export default {
+  name:'CatFeed',
   components: {
-    Vue3VirtualList,
+    VirtualScrollList,
+    MyComponent
   },
   data() {
     return {
       items: [
-        { id: 1, name: 'Item 1' },
-        { id: 2, name: 'Item 2' },
-        { id: 3, name: 'Item 3' },
-        { id: 4, name: 'Item 100' },
-      ],
-    };
-  },
-  methods: {
-    renderItem(index) {
-      const item = this.items[index];
-      return (
-        <div key={item.id} class="item">
-          {item.name}
-        </div>
-      );
-    },
-  },
-});
+        {id: 1, name: 'Item 1'},
+        {id: 2, name: 'Item 2'},
+        {id: 3, name: 'Item 3'},
+        {id: 4, name: 'Item 4'},
+        {id: 5, name: 'Item 5'},
+        {id: 6, name: 'Item 6'},
+        {id: 7, name: 'Item 7'},
+        {id: 8, name: 'Item 8'},
+        {id: 9, name: 'Item 9'},
+        {id: 10, name: 'Item 10'}
+      ]
+    }
+  }
+}
 </script>
-
-<style scoped>
-.container {
-  height: 400px;
-  overflow-y: auto;
-}
-.item {
-  height: 30px;
-  line-height: 30px;
-  padding: 5px;
-}
-</style>
