@@ -1,5 +1,5 @@
 <template>
-  <div class="virtual-scroll-list" ref="container" :style="{height: containerHeight}">
+  <div class="virtual-scroll-list" ref="container" :style="{height: containerHeight + 'px'}">
     <div :style="{transform: 'translateY(' + scrollTop + 'px)'}">
       <div v-for="(item, index) in virtualItems" :key="index">
         <slot :item="item"></slot>
@@ -17,10 +17,10 @@ export default {
     },
     itemHeight: {
       type: Number,
-      default: 30
+      default: 100
     },
     containerHeight: {
-      type: String,
+      type: Number,
       required: true
     }
   },
@@ -55,3 +55,9 @@ export default {
   }
 }
 </script>
+<style>
+.virtual-scroll-list{
+  overflow-y: auto;
+
+}
+</style>

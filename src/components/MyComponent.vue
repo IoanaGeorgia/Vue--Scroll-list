@@ -1,7 +1,7 @@
 <template>
   <div class="item">
-    <h2>{{ title }}</h2>
-    <p>{{ content }}</p>
+    <h2>{{ items.name }}</h2>
+
   </div>
 </template>
 
@@ -9,14 +9,11 @@
 export default {
   name:'MyComponent',
   props: {
-    title: {
-      type: String,
+    items: {
+      type: Object,
       required: true
     },
-    content: {
-      type: String,
-      required: true
-    }
+
   }
 }
 </script>
