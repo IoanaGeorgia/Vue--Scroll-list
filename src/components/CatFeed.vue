@@ -1,67 +1,53 @@
-<script>
-export default {
-  name:  'CatFeed',
-
-}
-import type { Ref } from 'vue'
-import { computed, ref } from 'vue'
-import { useVirtualList } from '@vueuse/core'
-
-const index: Ref = ref()
-const search = ref('')
-const allItems = Array.from(Array(99999).keys())
-  .map(i => ({
-    height: i % 2 === 0 ? 42 : 84,
-    size: i % 2 === 0 ? 'small' : 'large',
-  }))
-const filteredItems = computed(() => {
-  return allItems.filter(i => i.size.startsWith(search.value.toLowerCase()))
-})
-const { list, containerProps, wrapperProps, scrollTo } = useVirtualList(
-  filteredItems,
-  {
-    itemHeight: i => (filteredItems.value[i].height + 8),
-    overscan: 10,
-  },
-)
-function handleScrollTo() {
-  scrollTo(index.value)
-}
-</script>
-
 <template>
-  <div>
-    <div>
-      <div class="inline-block mr-4">
-        Jump to index
-        <input v-model="index" placeholder="Index" type="number">
-      </div>
-      <button type="button" @click="handleScrollTo">
-        Go
-      </button>
-    </div>
-    <div>
-      <div class="inline-block mr-4">
-        Filter list by size
-        <input v-model="search" placeholder="e.g. small, medium, large" type="search">
-      </div>
-    </div>
-    <div v-bind="containerProps" class="h-300px overflow-auto p-2 bg-gray-500/5 rounded">
-      <div v-bind="wrapperProps">
-        <div
-          v-for="{ index, data } in list"
-          :key="index"
-          class="border border-$c-divider mb-2"
-          :style="{
-            height: `${data.height}px`,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }"
-        >
-          Row {{ index }} <span opacity="70" m="l-1">({{ data.size }})</span>
-        </div>
-      </div>
-    </div>
+  <div class="container">
+    <vue3-virtual-list
+      :item-height="30"
+      :total-items="items.length"
+      :render-item="renderItem"
+    />
   </div>
 </template>
+
+<script>
+import { defineComponent } from 'vue';
+import Vue3VirtualList from 'vue3-virtual-list';
+
+export default defineComponent({
+  name: 'CatFeed',
+  components: {
+    Vue3VirtualList,
+  },
+  data() {
+    return {
+      items: [
+        { id: 1, name: 'Item 1' },
+        { id: 2, name: 'Item 2' },
+        { id: 3, name: 'Item 3' },
+        { id: 4, name: 'Item 100' },
+      ],
+    };
+  },
+  methods: {
+    renderItem(index) {
+      const item = this.items[index];
+      return (
+        <div key={item.id} class="item">
+          {item.name}
+        </div>
+      );
+    },
+  },
+});
+</script>
+
+<style scoped>
+.container {
+  height: 400px;
+  overflow-y: auto;
+}
+.item {
+  height: 30px;
+  line-height: 30px;
+  padding: 5px;
+}
+</style>
