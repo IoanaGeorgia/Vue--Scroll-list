@@ -1,7 +1,28 @@
 <template>
   <div class="item">
-    <h2>{{ items.name }}</h2>
+  <h3>{{items.name}}</h3>
 
+<div>
+<div>{{items.origin}}</div>
+<div class='description'>{{items.description}}</div>
+</div>
+  <div class='temperament'> {{items.temperament}}
+  </div>
+    
+    <div class='characteristics'>
+
+    <div>❤️️?: {{items.affection_level}}/5</div>
+       <div> 🐶? : {{items.dog_friendly}} /5</div>
+          <div>🕵️?: {{items.stranger_friendly}}/5</div>
+             <div>💅?: {{items.grooming}}/5</div>
+             <div>⚡>? : {{items.energy_level}}/5</div>
+             <div>👨‍🦲?: {{items.shedding_level}}/5</div>
+
+    </div>
+
+<div class='otherInfo'>
+ <div>Wiki: {{items.wikipedia_url}}</div>
+</div>
   </div>
 </template>
 
@@ -23,5 +44,45 @@ export default {
   padding: 10px;
   border: 1px solid gray;
   margin-bottom: 10px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:380px;
+
+}
+.description{
+  margin:3%;
+  padding:2%;
+  border:1px solid black;
+  text-align:center;
+  font-size:14px;
+}
+.temperament{
+  width:100%;
+  text-align:center;
+  font-size:15px;
+  color:violet;
+}
+.temperamentInfo{
+  font-size:10xp;
+}
+.characteristics{
+  margin:5%;
+  width:80%;
+  height:30%;
+  display:grid;
+  grid-template-rows:30% 30% 30%;
+  grid-template-columns:40% 40%;
+  justify-content: space-between;
+}
+.characteristics > div{
+  height:40px;
+}
+.otherInfo{
+  display:flex;
+  justify-content:space-evenly;
+  align-items:center;
+  font-size:15px
 }
 </style>
