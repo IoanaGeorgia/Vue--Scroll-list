@@ -24,14 +24,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin:-10px;
-  padding:0px;
+  padding:2%;
 }
 .navigation{
-    height:100%;
+  height:max-content;
   width:100%;
   position: absolute;
   margin-top:0px;
   margin-left:0px;
+  overflow:hidden;
 
 }
 .navigationLinks{
@@ -39,6 +40,7 @@ export default {
   display:flex;
   justify-content:space-evenly;
   align-items:center;
+  padding-bottom:3%;
 }
 .navigation a{
   color:black;

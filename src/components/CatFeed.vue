@@ -1,101 +1,57 @@
 <template>
-  <div style='padding:4%;'>
-  <!-- {{catItems}} -->
-   <virtual-scroll-list :items='items' :item-height="180" :container-height="400">
-      <template #default="{item}">
-        <my-component :items="item"></my-component>
-      </template>
-    </virtual-scroll-list>
+  <div class="bigCatWrapper">
+    <div class="catWrapper">
+      <virtual-scroll-list
+        :items="items"
+        :item-height="500"
+        :container-height="500"
+      >
+        <template #default="{ item }">
+          <my-component :items="item"></my-component>
+        </template>
+      </virtual-scroll-list>
+    </div>
   </div>
 </template>
 
 <script>
-import VirtualScrollList from './VirtualScrollList.vue'
-import MyComponent from './MyComponent.vue'
+import VirtualScrollList from './VirtualScrollList.vue';
+import MyComponent from './MyComponent.vue';
 
 export default {
-  name:'CatFeed',
+  name: 'CatFeed',
 
   components: {
     VirtualScrollList,
-    MyComponent
+    MyComponent,
   },
   data() {
     return {
-      items:[{}]
-
-    }
+      items: [{}],
+    };
   },
 
-mounted(){
-  this.getCats()
-},
-
-methods:{
-  getCats(){
-         fetch('https://api.thecatapi.com/v1/breeds')
-       .then(response => response.json())
-       .then(response => this.items = response)
+  mounted() {
+    this.getCats();
   },
-}
 
-
-
-//       catItems(){
-//  console.log(this.rawItems)
-        
-//         let items =[]
-//         let response = this.rawItems
-//          for(let i in response){
-//         let item={}
-//         item.name=response[i].name
-//         item.weight=response[i].weight.metric
-//         item.id=response[i].id
-//         item.adaptability = response[i].adaptability
-//         item.dog_friendly = response[i].dog_friendly
-//         item.affection_level = response[i].affection_level
-//         item.grooming = response[i].grooming
-//         item.origin = response[i].origin
-//         item.stranger_friendly = response[i].stranger_friendly
-//         item.temperament= response[i].temperament
-//         item.rare = response[i].rare
-//         item.lifespan = response[i].life_span
-//         item.wikipedia_url = response[i].wikipedia_url
-//         this.items.push(item)
-//       }
-//       console.log(items, 'j')
-//       return items
-
-   
-//       }
-       
-
-
-
-    // handleResponse(response){
-    //   this.items= []
-    //   for(let i in response){
-    //     let item={}
-    //     item.name=response[i].name
-    //     item.weight=response[i].weight.metric
-    //     item.id=response[i].id
-    //     item.adaptability = response[i].adaptability
-    //     item.dog_friendly = response[i].dog_friendly
-    //     item.affection_level = response[i].affection_level
-    //     item.grooming = response[i].grooming
-    //     item.origin = response[i].origin
-    //     item.stranger_friendly = response[i].stranger_friendly
-    //     item.temperament= response[i].temperament
-    //     item.rare = response[i].rare
-    //     item.lifespan = response[i].life_span
-    //     item.wikipedia_url = response[i].wikipedia_url
-    //     this.items.push(item)
-    //   }
-    //    console.log(this.items)
-  
-    // }
-   
-   
-  
-}
+  methods: {
+    getCats() {
+      fetch('https://api.thecatapi.com/v1/breeds')
+        .then((response) => response.json())
+        .then((response) => (this.items = response));
+    },
+  },
+};
 </script>
+<style>
+.bigCatWrapper {
+  padding-left: 4%;
+  border-top: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  overflow-y:hidden
+}
+</style>
